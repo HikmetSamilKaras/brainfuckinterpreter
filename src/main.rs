@@ -51,5 +51,6 @@ fn brain_fuck(program: &str,input: &str) {
 
 fn main() {
     let program = "";
-    brain_fuck(program,program);
+    let instruction = "";
+    brain_fuck(program,instruction);
 }
