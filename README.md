@@ -2,7 +2,7 @@ A brainfuck virtual machine written in rust.
 
 Example usage:
 
-```
+```rust
 fn main() {
     let program = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
     let instruction = "";
