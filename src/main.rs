@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+
 fn brain_fuck(program: &str,input: &str) {
     const TAPE_SIZE: usize = 30_000;
 
