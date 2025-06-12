@@ -22,9 +22,13 @@ fn brain_fuck(program: &str) {
             stack.push(i);
         }
         else if d == ']' {
-            let t = stack.pop().unwrap();
-            jump.insert(t,i);
-            jump.insert(i,t);
+            if let Some(t) = stack.pop() {
+                jump.insert(t,i);
+                jump.insert(i,t);
+            }
+            else {
+                panic!("Syntax Error: Brackets do not match");
+            }
         }
     }
     
