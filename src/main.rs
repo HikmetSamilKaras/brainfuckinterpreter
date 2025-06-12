@@ -32,6 +32,10 @@ fn brain_fuck(program: &str) {
         }
     }
     
+    if !stack.is_empty() {
+        panic!("Syntax Error: Brackets do not match");
+    }
+    
     while instruction_ptr < program.len() {
         match program[instruction_ptr] as char {
             '+' => arr[data_ptr] = arr[data_ptr].wrapping_add(1),
