@@ -1,6 +1,8 @@
 use std::collections::HashMap;
+use std::io;
+use std::io::Read;
 
-fn brain_fuck(program: &str,input: &str) {
+fn brain_fuck(program: &str) {
     const TAPE_SIZE: usize = 30_000;
 
     let mut arr: [u8; TAPE_SIZE]  = [0; TAPE_SIZE];
@@ -26,8 +28,6 @@ fn brain_fuck(program: &str,input: &str) {
         }
     }
     
-    let mut input = input.as_bytes().iter();
-    
     while instruction_ptr < program.len() {
         match program[instruction_ptr] as char {
             '+' => arr[data_ptr] = arr[data_ptr].wrapping_add(1),
@@ -41,9 +41,14 @@ fn brain_fuck(program: &str,input: &str) {
                 instruction_ptr = jump[&instruction_ptr]
             }
             '.' => print!("{}", arr[data_ptr] as char),
-            ',' => if let Some(&byte) = input.next() {
-                arr[data_ptr] = byte;
-            }
+            ',' => {
+                let mut input = [0; 1];
+                io::stdin().read_exact(&mut input).unwrap();
+                while input[0] == 13 {
+                    io::stdin().read_exact(&mut input).unwrap();
+                }
+                arr[data_ptr] = input[0];
+            },
             _ => ()
         }
         instruction_ptr += 1;
@@ -51,7 +56,12 @@ fn brain_fuck(program: &str,input: &str) {
 }
 
 fn main() {
-    let program = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
-    let instruction = "";
-    brain_fuck(program,instruction);
+    let program = "-->+++>+>+>+>+++++>++>++>->+++>++>+>>>>>>>>>>>>>>>>->++++>>>>->+++>+++>+++>+++>+
+++>+++>+>+>>>->->>++++>+>>>>->>++++>+>+>>->->++>++>++>++++>+>++>->++>++++>+>+>++
+>++>->->++>++>++++>+>+>>>>>->>->>++++>++>++>++++>>>>>->>>>>+++>->++++>->->->+++>
+>>+>+>+++>+>++++>>+++>->>>>>->>>++++>++>++>+>+++>->++++>>->->+++>+>+++>+>++++>>>
++++>->++++>>->->++>++++>++>++++>>++[-[->>+[>]++[<]<]>>+[>]<--[++>++++>]+[<]<<++]
+>>>[>]++++>++++[--[+>+>++++<<[-->>--<<[->-<[--->>+<<[+>+++<[+>>++<<]]]]]]>+++[>+
+++++++++++++++<-]>--.<<<]";
+    brain_fuck(program);
 }
