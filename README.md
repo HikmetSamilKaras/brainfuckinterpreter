@@ -4,9 +4,8 @@ Example usage:
 
 ```rust
 fn main() {
-    let program = "++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.";
-    let instruction = "";
-    brain_fuck(program,instruction);
+    let program = "+[-->-[>>+>-----<<]<--<---]>-.>>>+.>>..+++[.>]<<<<.+++.------.<<-.>>>>+.";
+    brain_fuck(program);
 }
 ```
 
